@@ -1,0 +1,1 @@
+const K='cyber-v21:';export const Save={get(k,d){try{const v=localStorage.getItem(K+k);return v===null?d:JSON.parse(v)}catch{return d}},set(k,v){try{localStorage.setItem(K+k,JSON.stringify(v))}catch{}},state(){return this.get('state',{unlocked:1,best:0,sound:true})},patch(v){this.set('state',{...this.state(),...v})}};
