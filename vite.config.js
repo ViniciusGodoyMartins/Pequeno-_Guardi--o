@@ -1,1 +1,10 @@
-import {defineConfig} from 'vite';export default defineConfig({base:'./',build:{target:'es2020',chunkSizeWarningLimit:1800}});
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  base: "./",
+
+  build: {
+    target: "es2020",
+    chunkSizeWarningLimit: 1800,
+  },
+});
