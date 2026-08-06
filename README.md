@@ -1,6 +1,6 @@
-# Guardião de Dados
+# Pequeno Guardião
 
-Guardião de Dados é um jogo 2D de ação, plataforma e tiro desenvolvido para navegadores. O projeto foi criado como atração interativa para uma feira de ciências sobre segurança digital, complementando uma apresentação teatral sobre os riscos e os cuidados no uso da internet.
+Pequeno Guardião é um jogo 2D de ação, plataforma e tiro desenvolvido para navegadores. O projeto foi criado como atração interativa para uma feira de ciências sobre segurança digital, complementando uma apresentação teatral sobre os riscos e os cuidados no uso da internet.
 
 O jogador controla um soldado cibernético equipado com uma arma de plasma e percorre cinco fases ambientadas dentro de um computador infectado. Durante a campanha, enfrenta ameaças inspiradas em malwares, como vírus, Trojans, Spywares, Worms, Adwares, Ransomwares e Rootkits. O confronto contra o Hacker responsável pela invasão acontece somente na quinta e última fase.
 
