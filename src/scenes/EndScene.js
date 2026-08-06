@@ -1,113 +1,37 @@
-import Phaser from "phaser";
-import { Save } from "../systems/Save.js";
-
-const CENTER_X = 640;
+import Phaser from 'phaser';
+import { Save } from '../systems/Save.js';
 
 export class EndScene extends Phaser.Scene {
   constructor() {
-    super("end");
+    super('end');
   }
 
-  init(data) {
-    this.data = data;
+  init(d) {
+    this.d = d;
   }
 
   create() {
-    this.cameras.main.setBackgroundColor("#02040d");
+    this.cameras.main.setBackgroundColor('#02040d');
+    const final = this.d.win && this.d.index === 5;
 
-    const isFinalLevel = this.data.win && this.data.index === 4;
+    const T = (y, t, z, c = '#fff') => this.add.text(640, y, t, {
+      fontFamily: 'monospace', fontSize: z + 'px', fontStyle: 'bold', color: c, align: 'center',
+      wordWrap: { width: 1000 }
+    }).setOrigin(0.5);
 
-    this.createTitle(isFinalLevel);
-    this.createMessage(isFinalLevel);
-    this.createScore();
-    this.createButtons(isFinalLevel);
-  }
+    const B = (y, t, cb) => this.add.text(640, y, t, {
+      fontFamily: 'monospace', fontSize: '24px', color: '#fff', backgroundColor: '#0c2948',
+      padding: { x: 25, y: 12 }
+    }).setOrigin(0.5).setInteractive({ useHandCursor: true }).on('pointerdown', cb);
 
-  createTitle(isFinalLevel) {
-    let title;
-    let color;
+    T(130, this.d.win ? (final ? 'SISTEMA PROTEGIDO!' : 'SETOR RESTAURADO') : 'SOLDADO DESATIVADO', 48, this.d.win ? '#31e8ff' : '#ff356b');
+    T(260, final ? `A melhor defesa começa com boas escolhas.\nPense antes de clicar, use senhas fortes e mantenha backups.` : this.d.tip, 23);
+    T(360, `PONTOS ${this.d.score} • RECORDE ${Save.state().best}`, 22, '#22e39a');
 
-    if (this.data.win) {
-      title = isFinalLevel
-        ? "SISTEMA PROTEGIDO!"
-        : "SETOR RESTAURADO";
-
-      color = "#31e8ff";
-    } else {
-      title = "SOLDADO DESATIVADO";
-      color = "#ff356b";
+    if (this.d.win && !final) {
+      B(460, 'PRÓXIMA FASE', () => this.scene.start('play', { index: this.d.index + 1 }));
     }
-
-    this.createLabel(130, title, 48, color);
-  }
-
-  createMessage(isFinalLevel) {
-    const message = isFinalLevel
-      ? `A melhor defesa começa com boas escolhas.
-Pense antes de clicar, use senhas fortes e mantenha backups.`
-      : this.data.tip;
-
-    this.createLabel(260, message, 23);
-  }
-
-  createScore() {
-    this.createLabel(
-      360,
-      `PONTOS ${this.data.score} • RECORDE ${Save.state().best}`,
-      22,
-      "#22e39a"
-    );
-  }
-
-  createButtons(isFinalLevel) {
-    if (this.data.win && !isFinalLevel) {
-      this.createButton("PRÓXIMA FASE", 460, () => {
-        this.scene.start("play", {
-          index: this.data.index + 1,
-        });
-      });
-    }
-
-    this.createButton("JOGAR NOVAMENTE", 530, () => {
-      this.scene.start("play", {
-        index: this.data.index,
-      });
-    });
-
-    this.createButton("MENU", 600, () => {
-      this.scene.start("menu");
-    });
-  }
-
-  createLabel(y, text, size, color = "#fff") {
-    return this.add
-      .text(CENTER_X, y, text, {
-        fontFamily: "monospace",
-        fontSize: `${size}px`,
-        fontStyle: "bold",
-        color,
-        align: "center",
-        wordWrap: {
-          width: 1000,
-        },
-      })
-      .setOrigin(0.5);
-  }
-
-  createButton(text, y, callback) {
-    return this.add
-      .text(CENTER_X, y, text, {
-        fontFamily: "monospace",
-        fontSize: "24px",
-        color: "#fff",
-        backgroundColor: "#0c2948",
-        padding: {
-          x: 25,
-          y: 12,
-        },
-      })
-      .setOrigin(0.5)
-      .setInteractive()
-      .on("pointerdown", callback);
+    B(530, 'JOGAR NOVAMENTE', () => this.scene.start('play', { index: this.d.index }));
+    B(600, 'MENU', () => this.scene.start('menu'));
   }
 }

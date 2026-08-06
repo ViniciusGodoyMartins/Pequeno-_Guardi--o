@@ -1,19 +1,16 @@
 {
-  "name": "guardiao-de-dados",
+  "name": "pequeno-guardiao",
   "private": true,
   "version": "2.1.0",
   "type": "module",
-
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview --host 0.0.0.0"
+    "dev": "node node_modules/vite/bin/vite.js",
+    "build": "node node_modules/vite/bin/vite.js build",
+    "preview": "node node_modules/vite/bin/vite.js preview --host 0.0.0.0"
   },
-
   "dependencies": {
     "phaser": "3.90.0"
   },
-
   "devDependencies": {
     "vite": "7.1.3"
   }

@@ -1,46 +1,30 @@
-import Phaser from "phaser";
+import Phaser from 'phaser';
+import './style.css';
+import { BootScene } from './scenes/BootScene.js';
+import { MenuScene } from './scenes/MenuScene.js';
+import { PlayScene } from './scenes/PlayScene.js';
+import { EndScene } from './scenes/EndScene.js';
 
-import "./style.css";
-
-import { BootScene } from "./scenes/BootScene.js";
-import { MenuScene } from "./scenes/MenuScene.js";
-import { PlayScene } from "./scenes/PlayScene.js";
-import { EndScene } from "./scenes/EndScene.js";
-
-const GAME_CONFIG = {
+new Phaser.Game({
   type: Phaser.AUTO,
-
-  parent: "game",
-
-  backgroundColor: "#02040d",
-
+  parent: 'game',
+  backgroundColor: '#02040d',
   pixelArt: true,
   roundPixels: true,
-
+  disableContextMenu: true,
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: 1280,
     height: 720,
-    fullscreenTarget: "game",
+    fullscreenTarget: 'game'
   },
-
   physics: {
-    default: "arcade",
+    default: 'arcade',
     arcade: {
-      gravity: {
-        y: 1500,
-      },
-      debug: false,
-    },
+      gravity: { y: 1500 },
+      debug: false
+    }
   },
-
-  scene: [
-    BootScene,
-    MenuScene,
-    PlayScene,
-    EndScene,
-  ],
-};
-
-new Phaser.Game(GAME_CONFIG);
+  scene: [BootScene, MenuScene, PlayScene, EndScene]
+});
